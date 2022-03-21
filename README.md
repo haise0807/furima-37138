@@ -32,8 +32,9 @@ Things you may want to cover:
 | nickname           | string | null: false              |
 | email              | string | null: false,unique: true |
 | encrypted_password | string | null: false              |
-| name               | string | null: false              |
-| birth_date         | string | null: false              |
+| first_name         | string | null: false              |
+| last_name          | string | null: false              |
+| birth_date         | date   | null: false              |
 
 
 ### アソシエーション
@@ -48,13 +49,13 @@ Things you may want to cover:
 | ------------------ | ---------- | ----------------------------- |
 | item_name          | string     | null:false                    |
 | information        | text       | null:false                    |
-| category           | integer    | null:false                    |
-| condition          | integer    | null:false                    |
-| shipping_fee       | integer    | null:false                    |
-| ship_from          | integer    | null:false                    |
-| shipping_days      | integer    | null:false                    |
+| category_id        | integer    | null:false                    |
+| condition_id       | integer    | null:false                    |
+| shipping_fee_id    | integer    | null:false                    |
+| prefecture_id      | integer    | null:false                    |
+| shipping_day_id    | integer    | null:false                    |
 | price              | integer    | null:false                    |
-| user_id            | references | null:false, foreign_key: true |
+| user               | references | null:false, foreign_key: true |
 
 
 
@@ -68,25 +69,26 @@ Things you may want to cover:
 
 | Column             | Type       | Options                      |
 | ------------------ | ---------- | ---------------------------- |
-| user_id            | references | null:false, foreign_key: true|
-| item_id            | references | null:false, foreign_key: true|
+| user               | references | null:false, foreign_key: true|
+| item               | references | null:false, foreign_key: true|
 
 ### アソシエーション
 
 - belongs_to :user
 - belongs_to :item
-- has_many :addresses
+- has_one :addresses
 
 ## addresses テーブル
 
 | Column             | Type       | Options                       |
 | ------------------ | ---------- | ----------------------------- |
 | post_code          | string     | null:false                    |
-| prefecture         | integer    | null:false                    |
+| prefecture_id      | integer    | null:false                    |
 | city               | string     | null:false                    |
 | house_number       | string     | null:false                    |
-| building_name      | string     | null:false                    |
+| building_name      | string     |                               |
 | phone_number       | string     | null:false                    |
+| purchase           | references | null:false, foreign_key: true |
 
 ### アソシエーション
 

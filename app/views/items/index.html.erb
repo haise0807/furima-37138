@@ -127,8 +127,8 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-      <li class='list'>
       <% @items.each do |item| %>
+       <li class='list'>
         <%= link_to "" do %>
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" %>
@@ -153,13 +153,12 @@
               </div>
               </div>
           </div>
-      </li>
-       
+        <% end %>
+       </li>
+      <% end %>
         <li class='list'>
-        <% end %>
-        <% end %>
           <%= link_to "" do %>
-          <% if @items[0] == nil%>
+            <% if @items[0] == nil%>
               <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
               <div class='item-info'>
                 <h3 class='item-name'>
@@ -173,10 +172,9 @@
                   </div>
                 </div>
               </div>
-         </li>
+            <% end %>
           <% end %>
-          <% end %>
-      
+        </li>
     </ul>
   </div>
   <%# /商品一覧 %>

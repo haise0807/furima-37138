@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :set_tweet, only: [:edit, :show, :update]
   before_action :authenticate_user!, except: [:index, :show]
   def index
     @items = Item.all.order('created_at DESC')
@@ -18,16 +19,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
-    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path
     else
@@ -40,5 +38,9 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:item_name, :information, :category_id, :condition_id, :shipping_fee_id, :prefecture_id,
                                  :shipping_day_id, :price, :image).merge(user_id: current_user.id)
+  end
+
+  def set_tweet
+    @item = Item.find(params[:id])
   end
 end

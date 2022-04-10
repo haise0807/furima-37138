@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_tweet, only: [:edit, :show, :update, :destroy]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   def index
     @items = Item.all.order('created_at DESC')
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
                                  :shipping_day_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  def set_tweet
+  def set_item
     @item = Item.find(params[:id])
   end
 end

@@ -7,12 +7,12 @@ class PurchaseAddress
     validates :user_id
     validates :item_id
     validates :post_code
-    validates :prefecture_id
     validates :city
     validates :house_number
     validates :phone_number
     validates :purchase_id
   end
+  validates :prefecture_id,   numericality: { other_than: 1, message: "can't be blank" }
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id )

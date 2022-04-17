@@ -9,7 +9,7 @@ RSpec.describe PurchaseAddress, type: :model do
   end
   describe '商品購入情報の登録' do
     context '商品購入ができるとき' do
-      it 'post_code,city, house_number,phone_number,prefecture_id,purchase_idが存在すれば登録できる' do
+      it 'post_code, city, house_number, phone_number, prefecture_id,purchase_id, tokenが存在すれば登録できる' do
         expect(@purchase_address).to be_valid
       end
 
@@ -59,15 +59,19 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
       end
 
+      it "tokenが空だと登録できない" do
+        @purchase_address.token = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
+
       it 'post_codeは、半角のハイフンを含んだ正しい形式でないと登録できない' do
-        
         @purchase_address.post_code = '1234-567'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
 
       it 'phone_numberは、10桁以上11桁以内の半角数値でないと登録できない' do
-        
         @purchase_address.phone_number = '０００１２３４５６７８'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")

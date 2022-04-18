@@ -76,6 +76,36 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
+
+      it 'prefecture_idが1だと登録できない' do
+        @purchase_address.prefecture_id = '1'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
+      it 'user_idが空だと登録できない' do
+        @purchase_address.user_id = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと登録できない' do
+        @purchase_address.item_id = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it 'phone_numberは、9桁以下だと登録できない' do
+        @purchase_address.phone_number = '12345'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+      end
+
+      it 'phone_numberは、12桁以上だと登録できない' do
+        @purchase_address.phone_number = '00112233445566778899'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+      end
     end
   end
 end

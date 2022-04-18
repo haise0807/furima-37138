@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    
+
     if @item.save
       redirect_to root_path
     else
@@ -23,12 +23,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-if @item.purchase != nil
-  redirect_to root_path
-else
+    if !@item.purchase.nil?
+      redirect_to root_path
+    else
       redirect_to action: :index unless current_user.id == @item.user_id
-end
-end
+    end
+  end
 
   def update
     if @item.update(item_params)

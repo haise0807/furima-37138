@@ -4,7 +4,7 @@ RSpec.describe PurchaseAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
-    
+
     @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
   end
   describe '商品購入情報の登録' do
@@ -59,7 +59,7 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
       end
 
-      it "tokenが空だと登録できない" do
+      it 'tokenが空だと登録できない' do
         @purchase_address.token = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
@@ -74,8 +74,8 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'phone_numberは、10桁以上11桁以内の半角数値でないと登録できない' do
         @purchase_address.phone_number = '０００１２３４５６７８'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
       end
     end
-   end
+  end
 end

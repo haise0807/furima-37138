@@ -4,7 +4,6 @@ class Item < ApplicationRecord
     validates :information
     validates :image
     validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 9_999_999, allow_blank: true }
-    
   end
 
   validates :category_id,     numericality: { other_than: 1, message: "can't be blank" }
